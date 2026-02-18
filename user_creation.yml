@@ -3,28 +3,28 @@
   become: yes
   gather_facts: yes
   vars:
-    username:
+    username:                # Creating user with list
       - piyush
       - raju
       - prajakta
 
   tasks:
-    - name: creating user
-      user:
+    - name: creating user     # Creating Users
+      user:                   # Module name 
         name: "{{ item }}"
         state: present
 
       loop: "{{ username }}"
-      notify: add details in file
+      notify: add details in file   # If user get add will save details in files
 
 
 
 
   handlers:
-    - name : add details in file
-      lineinfile:
+    - name : add details in file    
+      lineinfile:                     # Module name
         path: /root/user_details
-        line: "user added"
+        line: "user added"            
         create: yes
 
 
