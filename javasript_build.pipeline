@@ -1,0 +1,45 @@
+pipeline {
+	agent any
+    stages{
+	
+	stage(git pull){
+	steps{
+		git clone <gti repo address>
+}
+}
+
+
+	stage(package install){
+		steps{
+ 			dnf install nodejs
+ 			dnf install npm
+}
+}
+
+	stage(installing dependencies){
+		steps{
+
+		if [[ -f package.xml ]]; then
+		  npm install 
+}
+}
+
+	stage('build project'){
+		steps{
+			npm run build 
+}
+}
+
+	stage('pm2 service'){
+		steps{
+			npm install pm2
+}
+}
+
+	stage('starting service'){
+		steps{
+			pm2 start facebook.com
+}
+}
+}
+}
