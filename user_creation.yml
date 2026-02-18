@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+  vars:
+    username:
+      - piyush
+      - raju
+      - prajakta
+
+  tasks:
+    - name: creating user
+      user:
+        name: "{{ item }}"
+        state: present
+
+      loop: "{{ username }}"
+      notify: add details in file
+
+
+
+
+  handlers:
+    - name : add details in file
+      lineinfile:
+        path: /root/user_details
+        line: "user added"
+        create: yes
+
+
